@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Livro (
     autor VARCHAR(255) NOT NULL,
     editora VARCHAR(255),
     isbn VARCHAR(20) UNIQUE,
-    ano_publicacao YEAR,
+    ano_publicacao SMALLINT,
     categoria VARCHAR(100)
 );
 
@@ -40,3 +40,4 @@ CREATE TABLE IF NOT EXISTS Emprestimo (
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
     FOREIGN KEY (id_livro) REFERENCES Livro(id_livro)
 );
+
