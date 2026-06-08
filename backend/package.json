@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Muddykikoki/LibManager#readme",
+  "bugs": {
+    "url": "https://github.com/Muddykikoki/LibManager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muddykikoki/LibManager.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "type": "tsx watch index.ts",
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.8.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^25.9.2",
+    "nodemon": "^3.1.14",
+    "prisma": "^7.8.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

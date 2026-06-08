@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+}
+
+enum StatusEmprestimo {
+  EMPRESTADO
+  DEVOLVIDO
+  ATRASADO
+}
+
+model User {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  nome        String
+  email       String       @unique
+  senha       String
+  createdAt   DateTime     @default(now())
+  emprestimos Emprestimo[]
+}
+
+model Categoria {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  livros    Livro[]
+  createdAt DateTime @default(now())
+}
+
+model Livro {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo      String
+  autor       String
+  editora     String
+  ano         Int
+  disponivel  Boolean  @default(true)
+  categoriaId String   @db.ObjectId
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  emprestimos Emprestimo[]
+  createdAt   DateTime @default(now())
+}
+
+model Emprestimo {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  usuarioId      String           @db.ObjectId
+  usuario        User             @relation(fields: [usuarioId], references: [id])
+  livroId        String           @db.ObjectId
+  livro          Livro            @relation(fields: [livroId], references: [id])
+  dataEmprestimo DateTime         @default(now())
+  dataPrevista   DateTime
+  dataDevolucao  DateTime?
+  status         StatusEmprestimo @default(EMPRESTADO)
+}
