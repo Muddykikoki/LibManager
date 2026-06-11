@@ -14,13 +14,30 @@ enum StatusEmprestimo {
   ATRASADO
 }
 
+enum NivelPerfil {
+  LEITOR
+  BIBLIOTECARIO
+  DEV
+}
+
 model User {
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  nome        String
-  email       String       @unique
-  senha       String
-  createdAt   DateTime     @default(now())
-  emprestimos Emprestimo[]
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  nome          String
+  email         String         @unique
+  senha         String
+  nivel_perfil  NivelPerfil    @default(LEITOR)
+  createdAt     DateTime       @default(now())
+  emprestimos   Emprestimo[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String   @unique
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
 
 model Categoria {
@@ -31,16 +48,16 @@ model Categoria {
 }
 
 model Livro {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
   titulo      String
   autor       String
   editora     String
   ano         Int
-  disponivel  Boolean  @default(true)
-  categoriaId String   @db.ObjectId
-  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  disponivel  Boolean      @default(true)
+  categoriaId String       @db.ObjectId
+  categoria   Categoria    @relation(fields: [categoriaId], references: [id])
   emprestimos Emprestimo[]
-  createdAt   DateTime @default(now())
+  createdAt   DateTime     @default(now())
 }
 
 model Emprestimo {
