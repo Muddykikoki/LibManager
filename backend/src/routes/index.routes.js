@@ -3,6 +3,10 @@ import authRoutes from "./auth.routes.js";
 
 const router = Router();
 
+router.get("/", (req, res) => {
+  res.json({ message: "Tudo OK na api" });
+});
+
 router.use("/auth", authRoutes);
 
 export default router;

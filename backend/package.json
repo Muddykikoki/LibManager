@@ -15,8 +15,9 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "type": "tsx watch index.ts",
+    "dev": "nodemon --exec tsx src/server.js",
+    "roler": "node src/server.js",
+    "type": "tsx watch src/server.js",
     "seed": "tsx prisma/seed.ts"
   },
   "prisma": {
