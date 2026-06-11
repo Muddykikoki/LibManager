@@ -1,14 +1,15 @@
-import express from "express"
-import {prisma} from "./utils/prisma.js"
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import routes from "./routes/index.routes.js";
 
-const app = express()
+const app = express();
 
-app.get('/', async (req,res) => {
-    const Users = await prisma.Users.findMany()
+app.use(cors());
+app.use(express.json());
 
-    res.json(users)
-})
+app.use("/api", routes);
 
-app.listen(3000)
-
-
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000");
+});
