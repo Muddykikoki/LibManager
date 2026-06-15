@@ -1,10 +1,14 @@
 import { Router } from "express";
 import * as authController from "../controllers/auth.controller.js";
-/** Se o authController Crecer demais Criar middlewares direto na rota  */
+import { validar } from "../middlewares/validar.middleware.js";
+import {loginSchema,refreshSchema,} from "../schemas/auth.schema.js";
 const router = Router();
 
-router.post("/login", authController.login);
-router.post("/refresh", authController.refresh);
-router.post("/logout", authController.logout);
+router.post("/login",validar(loginSchema),authController.login);
+
+router.post("/refresh",validar(refreshSchema),authController.refresh);
+
+router.post("/logout",validar(refreshSchema),authController.logout);
+
 
 export default router;
