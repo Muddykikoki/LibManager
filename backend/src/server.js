@@ -15,6 +15,11 @@ app.get("/", (req, res) => {
 
 app.use("/api", routes);
 
+app.use((req, res, next) => {
+  console.log("REQ RECEBIDA:", req.method, req.url);
+  next();
+});
+
 app.listen(3000, () => {
   console.log("API rodando em http://localhost:3000/api");
 });
