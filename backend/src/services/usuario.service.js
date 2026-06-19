@@ -26,6 +26,20 @@ export async function atualizarUsuario(id, dados) {
   return usuarioRepository.atualizar(id, dados);
 }
 
+export async function deletar(id) {
+  const valida = await usuarioRepository.buscarPorId(id)
+
+  if(!valida) {
+    throw new Error("Usuario não encontrado")
+  }
+  const temEmprestimosAtivos = await usuarioRepository.temEmprestimosAtivos(id);
+  if(temEmprestimosAtivos) {
+    throw new Error("Usuario não pode ser deletado emprestimo em andamento")
+  } 
+  const deletar = await usuarioRepository.deletar(id)
+  return !!deletar
+}
+
 export async function buscarEmprestimos(id) {
   const valida = await usuarioRepository.buscarPorId(id);
 
@@ -34,4 +48,10 @@ export async function buscarEmprestimos(id) {
   }
   const emprestimos = await usuarioRepository.buscarEmprestimos(id);
   return emprestimos;
-  }
+}
+
+export async function listar() {
+  const usuarios = await usuarioRepository.listar()
+  return usuarios
+  
+}

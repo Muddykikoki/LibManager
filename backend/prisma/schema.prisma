@@ -2,7 +2,6 @@ generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
-// sei la porque ta vermelho mas ta funcionando
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
