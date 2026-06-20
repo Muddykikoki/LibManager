@@ -26,6 +26,13 @@ enum EstadoExemplar {
   USADO
 }
 
+enum StatusReserva {
+  ATIVA
+  CONCLUIDA
+  EXPIRADA
+  CANCELADA
+}
+
 model User {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
   nome          String
@@ -37,6 +44,7 @@ model User {
   compras       Compra[]
   emprestimos   Emprestimo[]
   refreshTokens RefreshToken[]
+  reservas      Reserva[]
 }
 
 model RefreshToken {
@@ -72,6 +80,7 @@ model Livro {
   categoriaIds String[]     @db.ObjectId
   categorias   Categoria[]  @relation(fields: [categoriaIds], references: [id])
   // emprestimos  Emprestimo[]
+  reservas     Reserva[]
   createdAt    DateTime     @default(now())
 }
 
@@ -109,4 +118,15 @@ model Compra {
   precoPago   Float
   pagoMoedas  Boolean  @default(false)
   createdAt   DateTime @default(now())
+}
+
+model Reserva {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String         @db.ObjectId
+  user      User           @relation(fields: [userId], references: [id])
+  livroId   String         @db.ObjectId
+  livro     Livro          @relation(fields: [livroId], references: [id])
+  status    StatusReserva  @default(ATIVA)
+  createdAt DateTime       @default(now())
+  expiraEm  DateTime
 }

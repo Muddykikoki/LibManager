@@ -54,3 +54,21 @@ export async function listar() {
   console.log("Usuarios encontrado: ", usuarios);
   return usuarios;
 }
+
+export async function encontrar(termo) {
+  return prisma.User.findMany({
+    where: {
+      OR: [
+        { nome: { contains: termo, mode: "insensitive" } },
+        { email: { contains: termo, mode: "insensitive" } },
+      ],
+    },
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+      nivel_perfil: true,
+      moedas: true,
+    },
+  });
+}

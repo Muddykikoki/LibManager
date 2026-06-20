@@ -52,3 +52,10 @@ export async function listar() {
   const usuarios = await usuarioRepository.listar();
   return usuarios;
 }
+
+export async function encontrar(termo) {
+  if (!termo || termo.trim() === "") {
+    throw new Error("Termo de busca é obrigatório");
+  }
+  return usuarioRepository.encontrar(termo);
+}

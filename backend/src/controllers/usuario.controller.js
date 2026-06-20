@@ -77,3 +77,13 @@ export async function meuPerfil(req, res) {
     res.status(400).json({ error: error.message });
   }
 }
+
+export async function encontrar(req, res) {
+  try {
+    const { q } = req.query;
+    const usuarios = await userService.encontrar(q);
+    res.json(usuarios);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}

@@ -18,6 +18,8 @@ routes.post(
   categoriaController.cadastrar,
 );
 
+routes.get("/", categoriaController.listar);
+
 routes.put(
   "/editar/:id",
   autenticar,
