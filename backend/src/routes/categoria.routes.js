@@ -7,7 +7,6 @@ import {
 } from "../schemas/categoria.schema.js";
 import { exigirPerfil } from "../middlewares/perfil.middleware.js";
 import { autenticar } from "../middlewares/auth.middleware.js";
-import { verificarAccessToken } from "../utils/jwt.js";
 
 const routes = new Router();
 
@@ -20,7 +19,7 @@ routes.post(
 );
 
 routes.put(
-  "/editar",
+  "/editar/:id",
   autenticar,
   exigirPerfil(1),
   validar(atualizarCategoriaSchema),
@@ -40,3 +39,5 @@ routes.post(
   exigirPerfil(1),
   categoriaController.criarSubcategoria,
 );
+
+export default routes

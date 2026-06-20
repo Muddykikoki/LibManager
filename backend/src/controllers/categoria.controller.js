@@ -2,10 +2,9 @@ import * as categoriaService from "../services/categoria.service.js";
 
 export async function cadastrar(req, res) {
   try {
-    const { nome, categoriasBaseIds } = req.body;
+    const { nome } = req.body;
     const categoria = await categoriaService.cadastrar({
       nome,
-      categoriasBaseIds,
     });
     res.status(201).json(categoria);
   } catch (error) {
@@ -15,11 +14,8 @@ export async function cadastrar(req, res) {
 
 export async function criarSubcategoria(req, res) {
   try {
-    const { id, subCategoriaIds } = req.body;
-    const categoria = await categoriaService.criarSubcategoria(
-      id,
-      subCategoriaIds,
-    );
+    const { id, categoriasBaseIds } = req.body;
+    const categoria = await categoriaService.vincularSubcategorias(id, categoriasBaseIds);
     res.json(categoria);
   } catch (error) {
     res.status(400).json({ error: error.message });

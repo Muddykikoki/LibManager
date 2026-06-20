@@ -6,27 +6,23 @@ export async function cadastrar(dados) {
     throw new Error("Categoria já existe");
   }
 
-  const criarDados = { nome: dados.nome };
+  return categoriaRepository.criar({ nome: dados.nome });
+}
 
-  if (dados.categoriasBaseIds?.length > 0) {
-    const bases = await categoriaRepository.buscarPorIds(
-      dados.categoriasBaseIds,
-    );
-    if (bases.length !== dados.categoriasBaseIds.length) {
-      throw new Error("Uma ou mais categorias base não foram encontradas");
-    }
-    criarDados.categoriasBaseIds = dados.categoriasBaseIds;
-    criarDados.categoriasBase = {
-      connect: dados.categoriasBaseIds.map((id) => ({ id })),
-    };
-    for (const base of bases) {
-      await categoriaRepository.atualizar(base.id, {
-        subCategoriaIds: [...(base.subCategoriaIds || [])],
-      });
-    }
+export async function vincularSubcategorias(id, categoriasBaseIds) {
+  const categoria = await categoriaRepository.buscarPorId(id);
+  if (!categoria) {
+    throw new Error("Categoria não encontrada");
   }
 
-  return categoriaRepository.criar(criarDados);
+  const bases = await categoriaRepository.buscarPorIds(categoriasBaseIds);
+  if (bases.length !== categoriasBaseIds.length) {
+    throw new Error("Uma ou mais categorias base não foram encontradas");
+  }
+
+  return categoriaRepository.atualizar(id, {
+    categoriasBase: { connect: categoriasBaseIds.map((baseId) => ({ id: baseId })) },
+  });
 }
 
 export async function criarSubcategoria(id, subCategoriaIds) {
