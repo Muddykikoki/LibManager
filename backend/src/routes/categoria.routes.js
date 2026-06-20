@@ -40,4 +40,4 @@ routes.post(
   categoriaController.criarSubcategoria,
 );
 
-export default routes
+export default routes;

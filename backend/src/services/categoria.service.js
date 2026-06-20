@@ -21,7 +21,9 @@ export async function vincularSubcategorias(id, categoriasBaseIds) {
   }
 
   return categoriaRepository.atualizar(id, {
-    categoriasBase: { connect: categoriasBaseIds.map((baseId) => ({ id: baseId })) },
+    categoriasBase: {
+      connect: categoriasBaseIds.map((baseId) => ({ id: baseId })),
+    },
   });
 }
 

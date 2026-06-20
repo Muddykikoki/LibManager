@@ -15,7 +15,10 @@ export async function cadastrar(req, res) {
 export async function criarSubcategoria(req, res) {
   try {
     const { id, categoriasBaseIds } = req.body;
-    const categoria = await categoriaService.vincularSubcategorias(id, categoriasBaseIds);
+    const categoria = await categoriaService.vincularSubcategorias(
+      id,
+      categoriasBaseIds,
+    );
     res.json(categoria);
   } catch (error) {
     res.status(400).json({ error: error.message });

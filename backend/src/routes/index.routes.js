@@ -1,7 +1,7 @@
 import { Router } from "express";
 import authRoutes from "./auth.routes.js";
 import userRoutes from "./usuario.routes.js";
-// import livroRoutes from "./livro.routes.js";
+import livroRoutes from "./livro.routes.js";
 import categoriaRoutes from "./categoria.routes.js";
 // import emprestimoRoutes from "./emprestimo.routes.js";
 
@@ -13,8 +13,8 @@ router.get("/", (req, res) => {
 
 router.use("/auth", authRoutes);
 router.use("/usuario", userRoutes);
-// router.use("/livros", livroRoutes);
+router.use("/livro", livroRoutes);
 router.use("/categoria", categoriaRoutes);
-// router.use("/emprestimos", emprestimoRoutes);
+// router.use("/emprestimo", emprestimoRoutes);
 
 export default router;

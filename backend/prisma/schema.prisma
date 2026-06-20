@@ -38,7 +38,6 @@ model RefreshToken {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
-//não funcionou do jeito facil bora de gambiarra depois da janta
 model Categoria {
   id                 String      @id @default(auto()) @map("_id") @db.ObjectId
   nome               String      @unique
@@ -58,6 +57,7 @@ model Livro {
   editora      String
   ano          Int
   disponivel   Boolean      @default(true)
+  descricao    String       
   categoriaIds String[]     @db.ObjectId
   categorias   Categoria[]  @relation(fields: [categoriaIds], references: [id])
   emprestimos  Emprestimo[]
