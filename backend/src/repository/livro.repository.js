@@ -35,6 +35,7 @@ export async function listar() {
 export async function encontrar(termo) {
   const include = {
     categorias: { select: { id: true, nome: true } },
+      exemplares: { where: { vendido: false } },
   };
   const palavras = termo
     .trim()
