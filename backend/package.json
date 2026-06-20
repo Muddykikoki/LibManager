@@ -16,6 +16,10 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon --exec tsx src/server.js",
+    "lint": "eslint .",
+    "debug:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "debug": "npm run format && npm run lint",
     "roler": "node src/server.js",
     "type": "tsx watch src/server.js",
     "seed": "tsx prisma/seed.ts"

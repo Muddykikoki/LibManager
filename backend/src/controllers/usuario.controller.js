@@ -42,7 +42,7 @@ export async function deletar(req, res) {
       res.json({ mensagem: "Usuario deletado com sucesso!" });
     }
   } catch (error) {
-    res.status(400).json({ erro: erro.mensagem });
+    res.status(400).json({ erro: error.mensagem });
   }
 }
 
