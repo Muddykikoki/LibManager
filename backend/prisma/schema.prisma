@@ -38,25 +38,30 @@ model RefreshToken {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
-
+//não funcionou do jeito facil bora de gambiarra depois da janta
 model Categoria {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  nome      String
-  livros    Livro[]
-  createdAt DateTime @default(now())
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+  nome               String      @unique
+  categoriasBaseIds  String[]    @db.ObjectId
+  categoriasBase     Categoria[] @relation("CategoriaSub", fields: [categoriasBaseIds], references: [id])
+  subCategoriaIds    String[]    @db.ObjectId
+  subCategorias      Categoria[] @relation("CategoriaSub", fields: [subCategoriaIds], references: [id])
+  livroIds           String[]    @db.ObjectId
+  livros             Livro[]     @relation(fields: [livroIds], references: [id])
+  createdAt          DateTime    @default(now())
 }
 
 model Livro {
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  titulo      String
-  autor       String
-  editora     String
-  ano         Int
-  disponivel  Boolean      @default(true)
-  categoriaId String       @db.ObjectId
-  categoria   Categoria    @relation(fields: [categoriaId], references: [id])
-  emprestimos Emprestimo[]
-  createdAt   DateTime     @default(now())
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  titulo       String
+  autor        String
+  editora      String
+  ano          Int
+  disponivel   Boolean      @default(true)
+  categoriaIds String[]     @db.ObjectId
+  categorias   Categoria[]  @relation(fields: [categoriaIds], references: [id])
+  emprestimos  Emprestimo[]
+  createdAt    DateTime     @default(now())
 }
 
 model Emprestimo {
