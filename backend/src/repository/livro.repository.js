@@ -28,10 +28,10 @@ export async function listar() {
   return prisma.Livro.findMany({
     include: {
       categorias: { select: { id: true, nome: true } },
+      exemplares: { where: { vendido: false } },
     },
   });
 }
-
 export async function encontrar(termo) {
   const include = {
     categorias: { select: { id: true, nome: true } },
