@@ -6,6 +6,7 @@ import categoriaRoutes from "./categoria.routes.js";
 import exemplarRoutes from "./exemplar.routes.js";
 import emprestimoRoutes from "./emprestimo.routes.js";
 import compraRoutes from "./compra.routes.js";
+import reservaRoutes from "./reserva.routes.js";
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use("/categoria", categoriaRoutes);
 router.use("/exemplar", exemplarRoutes);
 router.use("/emprestimo", emprestimoRoutes);
 router.use("/compra", compraRoutes);
+router.use("/reserva", reservaRoutes);
 
 export default router;
