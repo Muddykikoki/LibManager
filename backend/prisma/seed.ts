@@ -2,7 +2,6 @@ import "dotenv/config";
 import { prisma } from "../src/utils/prisma.js";
 import { hash } from "bcryptjs";
 
-
 async function main() {
   await prisma.emprestimo.deleteMany();
   await prisma.livro.deleteMany();
@@ -81,9 +80,7 @@ async function main() {
     data: {
       usuarioId: user1.id,
       livroId: livro1.id,
-      dataPrevista: new Date(
-        Date.now() + 14 * 24 * 60 * 60 * 1000
-      ),
+      dataPrevista: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
     },
   });
 
@@ -91,9 +88,7 @@ async function main() {
     data: {
       usuarioId: user2.id,
       livroId: livro3.id,
-      dataPrevista: new Date(
-        Date.now() + 7 * 24 * 60 * 60 * 1000
-      ),
+      dataPrevista: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       dataDevolucao: new Date(),
       status: "DEVOLVIDO",
     },
