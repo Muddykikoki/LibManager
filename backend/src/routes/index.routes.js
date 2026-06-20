@@ -3,7 +3,9 @@ import authRoutes from "./auth.routes.js";
 import userRoutes from "./usuario.routes.js";
 import livroRoutes from "./livro.routes.js";
 import categoriaRoutes from "./categoria.routes.js";
-// import emprestimoRoutes from "./emprestimo.routes.js";
+import exemplarRoutes from "./exemplar.routes.js";
+import emprestimoRoutes from "./emprestimo.routes.js";
+import compraRoutes from "./compra.routes.js";
 
 const router = Router();
 
@@ -15,6 +17,8 @@ router.use("/auth", authRoutes);
 router.use("/usuario", userRoutes);
 router.use("/livro", livroRoutes);
 router.use("/categoria", categoriaRoutes);
-// router.use("/emprestimo", emprestimoRoutes);
+router.use("/exemplar", exemplarRoutes);
+router.use("/emprestimo", emprestimoRoutes);
+router.use("/compra", compraRoutes);
 
 export default router;

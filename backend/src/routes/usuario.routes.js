@@ -40,6 +40,6 @@ router.get(
   userController.buscarEmprestimos,
 );
 
-router.get("/listar", autenticar, exigirPerfil(1), userController.listar);
+router.get("/", autenticar, exigirPerfil(1), userController.listar);
 
 export default router;

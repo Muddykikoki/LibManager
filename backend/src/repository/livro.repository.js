@@ -8,6 +8,7 @@ export async function criar(dados) {
       editora: dados.editora,
       ano: dados.ano,
       descricao: dados.descricao,
+      preco: dados.preco,
       categoriaIds: dados.categoriaIds,
     },
   });
@@ -34,7 +35,10 @@ export async function encontrar(termo) {
   const include = {
     categorias: { select: { id: true, nome: true } },
   };
-  const palavras = termo.trim().split(/\s+/).filter((p) => p.length > 0);
+  const palavras = termo
+    .trim()
+    .split(/\s+/)
+    .filter((p) => p.length > 0);
   const categoriasMatch = await prisma.Categoria.findMany({
     where: { nome: { contains: termo, mode: "insensitive" } },
     select: { id: true, nome: true },
@@ -57,7 +61,11 @@ export async function encontrar(termo) {
       include,
     });
     porTitulo.forEach((l) => {
-      const bonus = l.titulo.startsWith(palavra) ? 2 : l.titulo.toLowerCase().startsWith(palavra.toLowerCase()) ? 1 : 0;
+      const bonus = l.titulo.startsWith(palavra)
+        ? 2
+        : l.titulo.toLowerCase().startsWith(palavra.toLowerCase())
+          ? 1
+          : 0;
       adicionar(l, 100 + bonus);
     });
     if (categoriaIds.length > 0) {

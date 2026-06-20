@@ -30,7 +30,7 @@ routes.delete(
   livroController.deletar,
 );
 
-routes.get("/listar", livroController.listar);
+routes.get("/", livroController.listar);
 
 routes.get(
   "/encontrar",

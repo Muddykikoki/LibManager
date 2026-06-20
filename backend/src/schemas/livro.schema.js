@@ -5,7 +5,12 @@ export const livroSchema = z.object({
   autor: z.string().min(1),
   editora: z.string().optional(),
   descricao: z.string().optional(),
-  ano: z.coerce.number().int().min(1, "Ano inválido").max(new Date().getFullYear(), "Livros do futuro não são aceitos"),
+  preco: z.coerce.number().min(0, "Preço deve ser positivo"),
+  ano: z.coerce
+    .number()
+    .int()
+    .min(1, "Ano inválido")
+    .max(new Date().getFullYear(), "Livros do futuro não são aceitos"),
   categoriaIds: z.array(z.string()).optional(),
 });
 
