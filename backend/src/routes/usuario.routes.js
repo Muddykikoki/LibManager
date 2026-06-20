@@ -42,4 +42,6 @@ router.get(
 
 router.get("/", autenticar, exigirPerfil(1), userController.listar);
 
+router.get("/perfil", autenticar, userController.meuPerfil);
+
 export default router;

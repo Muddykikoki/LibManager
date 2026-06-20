@@ -19,6 +19,7 @@ export async function buscarPorId(id) {
     where: { id },
     include: {
       categorias: { select: { id: true, nome: true } },
+      exemplares: { where: { vendido: false } },
     },
   });
 }

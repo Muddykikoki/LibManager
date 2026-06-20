@@ -64,3 +64,16 @@ export async function listar(req, res) {
     res.status(400).json({ error: error.mensagem });
   }
 }
+
+export async function meuPerfil(req, res) {
+  try {
+    const usuario = await userService.buscarPorId(req.user.sub);
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+    const { senha, ...dados } = usuario;
+    res.json(dados);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
