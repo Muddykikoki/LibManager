@@ -19,6 +19,13 @@ enum NivelPerfil {
   DEV
 }
 
+enum EstadoExemplar {
+  NOVO
+  OTIMO
+  BOM
+  USADO
+}
+
 model User {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
   nome          String
@@ -26,6 +33,8 @@ model User {
   senha         String
   nivel_perfil  NivelPerfil    @default(LEITOR)
   createdAt     DateTime       @default(now())
+  moedas        Int            @default(0)
+  compras       Compra[]
   emprestimos   Emprestimo[]
   refreshTokens RefreshToken[]
 }
@@ -58,9 +67,11 @@ model Livro {
   ano          Int
   disponivel   Boolean      @default(true)
   descricao    String       
+  preco        Float        @default(0)
+  examplares   Exemplar[]
   categoriaIds String[]     @db.ObjectId
   categorias   Categoria[]  @relation(fields: [categoriaIds], references: [id])
-  emprestimos  Emprestimo[]
+  // emprestimos  Emprestimo[]
   createdAt    DateTime     @default(now())
 }
 
@@ -68,10 +79,34 @@ model Emprestimo {
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
   usuarioId      String           @db.ObjectId
   usuario        User             @relation(fields: [usuarioId], references: [id])
-  livroId        String           @db.ObjectId
-  livro          Livro            @relation(fields: [livroId], references: [id])
+  exemplarId     String           @db.ObjectId
+  exemplar       Exemplar         @relation(fields: [exemplarId], references: [id])
   dataEmprestimo DateTime         @default(now())
   dataPrevista   DateTime
   dataDevolucao  DateTime?
+  moedasGanhas   Int              @default(0)
   status         StatusEmprestimo @default(EMPRESTADO)
+}
+
+model Exemplar {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  livroId     String         @db.ObjectId
+  livro       Livro          @relation(fields: [livroId], references: [id])
+  estado      EstadoExemplar @default(NOVO)
+  disponivel  Boolean        @default(true)
+  vendido     Boolean        @default(false)
+  emprestimos Emprestimo[]
+  compras     Compra[]
+  createdAt   DateTime       @default(now())
+}
+
+model Compra {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  exemplarId  String   @db.ObjectId
+  exemplar    Exemplar @relation(fields: [exemplarId], references: [id])
+  precoPago   Float
+  pagoMoedas  Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }
