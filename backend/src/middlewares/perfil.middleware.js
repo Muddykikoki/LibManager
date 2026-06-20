@@ -9,7 +9,7 @@ export function exigirPerfil(...perfisPermitidos) {
   return (req, res, next) => {
     const nivelUser = resolverNivel(req.user?.nivel_perfil);
     const temPermissao = perfisPermitidos.some(
-      (p) => nivelUser >= resolverNivel(p)
+      (p) => nivelUser >= resolverNivel(p),
     );
     if (!temPermissao)
       return res.status(403).json({ message: "Acesso negado" });

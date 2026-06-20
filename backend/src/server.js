@@ -10,7 +10,9 @@ app.use(express.json());
 
 //teste de rota raiz para verificar se o servidor está rodando
 app.get("/", (req, res) => {
-  res.json({ message: `Servidor rodando! Acesse http://localhost:${process.env.PORT || 3000}/api para utilizar a API.` });
+  res.json({
+    message: `Servidor rodando! Acesse http://localhost:${process.env.PORT || 3000}/api para utilizar a API.`,
+  });
 });
 
 app.use("/api", routes);

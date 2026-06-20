@@ -12,8 +12,11 @@ export function gerarAccessToken(payload) {
   return jwt.sign(payload, ACCESS_SECRET, { expiresIn: ACCESS_EXPIRES });
 }
 export function gerarRefreshToken(payload, nivel_perfil) {
-  const expiresInSeconds = REFRESH_EXPIRES[nivel_perfil] ?? REFRESH_EXPIRES.LEITOR;
-  const token = jwt.sign(payload, REFRESH_SECRET, { expiresIn: expiresInSeconds });
+  const expiresInSeconds =
+    REFRESH_EXPIRES[nivel_perfil] ?? REFRESH_EXPIRES.LEITOR;
+  const token = jwt.sign(payload, REFRESH_SECRET, {
+    expiresIn: expiresInSeconds,
+  });
   const expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
   return { token, expiresAt };
 }
