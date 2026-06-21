@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const savedUser = localStorage.getItem("user");
-
     if (token && savedUser) {
       try {
         setUser(JSON.parse(savedUser));
@@ -23,11 +22,9 @@ export function AuthProvider({ children }) {
 
   async function login(email, senha) {
     const { data } = await api.post("/auth/login", { email, senha });
-
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
     localStorage.setItem("user", JSON.stringify(data.user));
-
     setUser(data.user);
     return data;
   }
@@ -46,7 +43,9 @@ export function AuthProvider({ children }) {
   if (carregando) return null;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, isAuthenticated: !!user }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -54,8 +53,7 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (!context)
     throw new Error("useAuth deve ser usado dentro de AuthProvider");
-  }
   return context;
 }

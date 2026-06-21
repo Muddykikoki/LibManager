@@ -3,11 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function AdminRoute({ children }) {
   const { user } = useAuth();
-  const ehAdmin = user?.nivel_perfil === "BIBLIOTECARIO" || user?.nivel_perfil === "DEV";
-
-  if (!ehAdmin) {
-    return <Navigate to="/" />;
-  }
-
-  return children;
+  const ehAdmin =
+    user?.nivel_perfil === "BIBLIOTECARIO" || user?.nivel_perfil === "DEV";
+  return ehAdmin ? children : <Navigate to="/" />;
 }
