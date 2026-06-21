@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { navbar } from "../styles/navbar";
 import {
   FiHome,
   FiBookOpen,
@@ -12,6 +13,7 @@ import {
   FiUsers,
   FiPackage,
   FiTag,
+  FiShoppingCart,
 } from "react-icons/fi";
 
 export default function Navbar({ collapsed, setCollapsed, isMobile }) {
@@ -29,13 +31,16 @@ export default function Navbar({ collapsed, setCollapsed, isMobile }) {
 
   const links = [
     { to: "/", icon: <FiHome size={20} />, label: "Home" },
-    {
-      to: "/emprestimos",
-      icon: <FiBookOpen size={20} />,
-      label: "Meus Empréstimos",
-    },
+    { to: "/emprestimos", icon: <FiBookOpen size={20} />, label: "Operações" },
     { to: "/perfil", icon: <FiUser size={20} />, label: "Perfil" },
   ];
+  if (ehAdmin) {
+    links.push({
+      to: "/compras",
+      icon: <FiShoppingCart size={20} />,
+      label: "Compras",
+    });
+  }
 
   const cadastroLinks = [
     {
@@ -53,28 +58,29 @@ export default function Navbar({ collapsed, setCollapsed, isMobile }) {
 
   return (
     <nav
-      className={`navbar ${collapsed ? "collapsed" : ""} ${isMobile ? "mobile" : ""}`}
+      className={`${navbar.sidebar} ${collapsed ? navbar.sidebarCollapsed : navbar.sidebarExpanded}`}
     >
-      <div className="navbar-header">
+      <div className={navbar.header}>
         {collapsed ? (
-          <span className="logo-mini">LM</span>
+          <span className={navbar.logoMini}>LM</span>
         ) : (
-          <span className="logo-full">LibManager</span>
+          <span className={navbar.logoFull}>LibManager</span>
         )}
       </div>
-
-      <ul className="navbar-links">
+      <ul className={navbar.linksList}>
         {links.map((link) => (
           <li key={link.to}>
             <NavLink
               to={link.to}
               end={link.to === "/"}
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                `${navbar.link} ${isActive ? navbar.linkActive : navbar.linkInactive}`
               }
             >
-              <span className="nav-icon">{link.icon}</span>
-              {!collapsed && <span className="nav-label">{link.label}</span>}
+              <span className={navbar.linkIcon}>{link.icon}</span>
+              {!collapsed && (
+                <span className={navbar.linkLabel}>{link.label}</span>
+              )}
             </NavLink>
           </li>
         ))}
@@ -82,43 +88,34 @@ export default function Navbar({ collapsed, setCollapsed, isMobile }) {
         {ehAdmin && (
           <li>
             <button
-              className="nav-link submenu-toggle"
+              className={navbar.submenuBtn}
               onClick={() => setCadastrosAberto(!cadastrosAberto)}
             >
-              <span className="nav-icon">
+              <span className={navbar.linkIcon}>
                 <FiBookOpen size={20} />
               </span>
               {!collapsed && (
                 <>
-                  <span className="nav-label">Cadastros</span>
+                  <span className="flex-1">Cadastros</span>
                   {cadastrosAberto && (
-                    <span className="submenu-arrow open">
-                      <FiChevronDown size={16} />
-                    </span>
+                    <FiChevronDown size={16} className={navbar.submenuArrow} />
                   )}
                 </>
-              )}
-              {collapsed && cadastrosAberto && (
-                <span className="submenu-arrow-collapsed">
-                  <FiChevronDown size={12} />
-                </span>
               )}
             </button>
 
             {cadastrosAberto && !collapsed && (
-              <ul className="submenu submenu-expanded">
+              <ul className={navbar.submenuList}>
                 {cadastroLinks.map((link) => (
                   <li key={link.to}>
                     <NavLink
                       to={link.to}
                       className={({ isActive }) =>
-                        isActive
-                          ? "nav-link submenu-link active"
-                          : "nav-link submenu-link"
+                        `${navbar.submenuLink} ${isActive ? navbar.submenuLinkActive : navbar.submenuLinkInactive}`
                       }
                     >
-                      <span className="nav-icon">{link.icon}</span>
-                      <span className="nav-label">{link.label}</span>
+                      <span className={navbar.linkIcon}>{link.icon}</span>
+                      <span className={navbar.linkLabel}>{link.label}</span>
                     </NavLink>
                   </li>
                 ))}
@@ -126,19 +123,17 @@ export default function Navbar({ collapsed, setCollapsed, isMobile }) {
             )}
 
             {cadastrosAberto && collapsed && (
-              <ul className="submenu submenu-collapsed">
+              <ul className={navbar.submenuCollapsedList}>
                 {cadastroLinks.map((link) => (
                   <li key={link.to}>
                     <NavLink
                       to={link.to}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "nav-link submenu-link-mini active"
-                          : "nav-link submenu-link-mini"
-                      }
                       title={link.label}
+                      className={({ isActive }) =>
+                        `${navbar.submenuCollapsedLink} ${isActive ? navbar.submenuCollapsedLinkActive : navbar.submenuCollapsedLinkInactive}`
+                      }
                     >
-                      <span className="nav-icon">{link.icon}</span>
+                      {link.icon}
                     </NavLink>
                   </li>
                 ))}
@@ -148,28 +143,28 @@ export default function Navbar({ collapsed, setCollapsed, isMobile }) {
         )}
       </ul>
 
-      <div className="navbar-footer">
-        <button className="nav-link logout-btn" onClick={handleLogout}>
-          <span className="nav-icon">
+      <div className={navbar.footer}>
+        <button onClick={handleLogout} className={navbar.logoutBtn}>
+          <span className={navbar.linkIcon}>
             <FiLogOut size={20} />
           </span>
-          {!collapsed && <span className="nav-label">Sair</span>}
+          {!collapsed && <span>Sair</span>}
         </button>
         <button
-          className="nav-link toggle-btn"
           onClick={() => {
             setCollapsed(!collapsed);
             if (!collapsed) setCadastrosAberto(false);
           }}
+          className={navbar.toggleBtn}
         >
-          <span className="nav-icon">
+          <span className={navbar.linkIcon}>
             {collapsed ? (
               <FiChevronRight size={20} />
             ) : (
               <FiChevronLeft size={20} />
             )}
           </span>
-          {!collapsed && <span className="nav-label">Retrair</span>}
+          {!collapsed && <span>Retrair</span>}
         </button>
       </div>
     </nav>
