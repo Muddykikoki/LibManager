@@ -48,7 +48,7 @@ export async function listarPorUsuario(usuarioId) {
   return emprestimoRepository.listarPorUsuario(usuarioId);
 }
 
-export async function devolver(id) {
+export async function devolver(id, estadoExemplar, perfil) {
   const emprestimo = await emprestimoRepository.buscarPorId(id);
   if (!emprestimo) {
     throw new Error("Empréstimo não encontrado");
@@ -76,6 +76,22 @@ export async function devolver(id) {
   }
 
   await exemplarRepository.marcarDisponivel(emprestimo.exemplarId);
+
+  if (estadoExemplar) {
+    if (perfil === "BIBLIOTECARIO") {
+      const hierarquia = { NOVO: 4, OTIMO: 3, BOM: 2, USADO: 1 };
+      const estadoAtual = emprestimo.exemplar.estado;
+      if (hierarquia[estadoExemplar] > hierarquia[estadoAtual]) {
+        throw new Error(
+          "Bibliotecários não podem melhorar o estado do exemplar",
+        );
+      }
+    }
+    await exemplarRepository.atualizarEstado(
+      emprestimo.exemplarId,
+      estadoExemplar,
+    );
+  }
 
   return emprestimoRepository.devolver(id, {
     dataDevolucao: agora,

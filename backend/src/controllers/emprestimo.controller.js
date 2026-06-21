@@ -35,7 +35,12 @@ export async function listarMeus(req, res) {
 export async function devolver(req, res) {
   try {
     const { id } = req.params;
-    const emprestimo = await emprestimoService.devolver(id);
+    const { estado } = req.body;
+    const emprestimo = await emprestimoService.devolver(
+      id,
+      estado,
+      req.user.nivel_perfil,
+    );
     res.json(emprestimo);
   } catch (error) {
     res.status(400).json({ error: error.message });
