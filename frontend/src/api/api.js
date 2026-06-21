@@ -19,8 +19,8 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
       const refreshToken = localStorage.getItem("refreshToken");
+
       if (!refreshToken) {
         localStorage.clear();
         window.location.href = "/login";
@@ -30,12 +30,10 @@ api.interceptors.response.use(
       try {
         const { data } = await axios.post(
           `${import.meta.env.VITE_API_URL || "http://localhost:3000/api"}/auth/refresh`,
-          { refreshToken }
+          { refreshToken },
         );
-
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
-
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
         return api(originalRequest);
       } catch {
@@ -46,7 +44,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;
