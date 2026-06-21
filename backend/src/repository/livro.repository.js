@@ -35,7 +35,7 @@ export async function listar() {
 export async function encontrar(termo) {
   const include = {
     categorias: { select: { id: true, nome: true } },
-      exemplares: { where: { vendido: false } },
+    exemplares: { where: { vendido: false } },
   };
   const palavras = termo
     .trim()
@@ -46,6 +46,19 @@ export async function encontrar(termo) {
     select: { id: true, nome: true },
   });
   const categoriaIds = categoriasMatch.map((c) => c.id);
+  if (categoriaIds.length > 0) {
+    const subcategorias = await prisma.Categoria.findMany({
+      where: {
+        categoriasBaseIds: { hasSome: categoriaIds },
+      },
+      select: { id: true },
+    });
+    subcategorias.forEach((s) => {
+      if (!categoriaIds.includes(s.id)) {
+        categoriaIds.push(s.id);
+      }
+    });
+  }
   const pontuacao = new Map();
 
   function adicionar(livro, pontos) {
