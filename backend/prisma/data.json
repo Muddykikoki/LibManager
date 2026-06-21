@@ -1,0 +1,441 @@
+{
+  "usuarios": [
+    {
+      "id": "6a3c4c4bc14b7d8136148a52",
+      "nome": "dev",
+      "email": "dev@dev.com",
+      "senha": "$2b$10$Jf9hdWX3fMnlg1rz3nqrmObl1ek9wIJBAlP67p/hZh47ptIX6Dz6G",
+      "nivel_perfil": "DEV",
+      "createdAt": "2026-06-24T21:29:47.378Z",
+      "moedas": 0
+    },
+    {
+      "id": "6a3c4cb60b8e65f9ef7bfd9c",
+      "nome": "leitor",
+      "email": "leitor@leitor.com",
+      "senha": "$2b$10$0cvNOYFnzGqYEELgj1s3jOAhgZiJfTaSnJQl6IBsGr2JIv/IJ2flW",
+      "nivel_perfil": "LEITOR",
+      "createdAt": "2026-06-24T21:31:34.695Z",
+      "moedas": 500
+    },
+    {
+      "id": "6a3c4cee0b8e65f9ef7bfd9d",
+      "nome": "bii",
+      "email": "bi@bi.com",
+      "senha": "$2b$10$1ILidyZiPSfQIWKIdPZ4CO3l9Ir2cQhgljzhoj/U0AcbQyIQ6qW36",
+      "nivel_perfil": "BIBLIOTECARIO",
+      "createdAt": "2026-06-24T21:32:30.563Z",
+      "moedas": 0
+    }
+  ],
+  "categorias": [
+    {
+      "id": "6a3c4d270b8e65f9ef7bfd9e",
+      "nome": "Drama",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [
+        "6a3c4d5b0b8e65f9ef7bfda3",
+        "6a3c4d770b8e65f9ef7bfda5",
+        "6a3c528f866c945659db0511",
+        "6a3c528f866c945659db0509"
+      ],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:33:27.049Z"
+    },
+    {
+      "id": "6a3c4d310b8e65f9ef7bfd9f",
+      "nome": "Terror",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [
+        "6a3c4d5b0b8e65f9ef7bfda3",
+        "6a3c4d770b8e65f9ef7bfda5",
+        "6a37201bb63513954c7172b2"
+      ],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:33:37.115Z"
+    },
+    {
+      "id": "6a3c4d360b8e65f9ef7bfda0",
+      "nome": "Romance",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [
+        "6a3c4d480b8e65f9ef7bfda2",
+        "6a3c528f866c945659db0509"
+      ],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:33:42.009Z"
+    },
+    {
+      "id": "6a3c4d3b0b8e65f9ef7bfda1",
+      "nome": "Comedia",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": ["6a3c4d480b8e65f9ef7bfda2"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:33:47.480Z"
+    },
+    {
+      "id": "6a3c4d480b8e65f9ef7bfda2",
+      "nome": "Comedia Romantica",
+      "categoriasBaseIds": [
+        "6a3c4d360b8e65f9ef7bfda0",
+        "6a3c4d3b0b8e65f9ef7bfda1"
+      ],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:34:00.726Z"
+    },
+    {
+      "id": "6a3c4d640b8e65f9ef7bfda4",
+      "nome": "Suspense",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": ["6a3c4d770b8e65f9ef7bfda5"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:34:28.366Z"
+    },
+    {
+      "id": "6a3c4d770b8e65f9ef7bfda5",
+      "nome": "Terror Psicologico",
+      "categoriasBaseIds": [
+        "6a3c4d270b8e65f9ef7bfd9e",
+        "6a3c4d310b8e65f9ef7bfd9f",
+        "6a3c4d640b8e65f9ef7bfda4"
+      ],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:34:47.190Z"
+    },
+    {
+      "id": "6a3c4db50b8e65f9ef7bfda6",
+      "nome": "Fantasia",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [
+        "6a3c528f866c945659db0505",
+        "6a3c528f866c945659db050b"
+      ],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:35:49.559Z"
+    },
+    {
+      "id": "6a3c4dbd0b8e65f9ef7bfda7",
+      "nome": "Aventura",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": ["6a3c4e030b8e65f9ef7bfda8"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:35:57.532Z"
+    },
+    {
+      "id": "6a3c4e030b8e65f9ef7bfda8",
+      "nome": "Ação ",
+      "categoriasBaseIds": ["6a3c4dbd0b8e65f9ef7bfda7"],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:37:07.239Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0501",
+      "nome": "comedia romantica",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": ["6a3c528f866c945659db050f"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.209Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0505",
+      "nome": "cyberpunk distopico",
+      "categoriasBaseIds": [
+        "6a3c4db50b8e65f9ef7bfda6",
+        "6a3c528f866c945659db0507"
+      ],
+      "subCategoriaIds": ["6a3724c96c2c6ac711d99642"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.251Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0507",
+      "nome": "ficcao cientifica",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": ["6a3c528f866c945659db0505"],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.265Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0509",
+      "nome": "drama romantico",
+      "categoriasBaseIds": [
+        "6a3c4d270b8e65f9ef7bfd9e",
+        "6a3c4d360b8e65f9ef7bfda0"
+      ],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.280Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050b",
+      "nome": "fantasia politica",
+      "categoriasBaseIds": ["6a3c4db50b8e65f9ef7bfda6"],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.375Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050d",
+      "nome": "suspense psicologico",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.389Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050f",
+      "nome": "acao urbana",
+      "categoriasBaseIds": ["6a3c528f866c945659db0501"],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.418Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0511",
+      "nome": "drama existencial",
+      "categoriasBaseIds": ["6a3c4d270b8e65f9ef7bfd9e"],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-24T21:56:31.431Z"
+    },
+    {
+      "id": "6a371eaf6f67724548d0ba6f",
+      "nome": "Psicologico",
+      "categoriasBaseIds": [],
+      "subCategoriaIds": [],
+      "livroIds": [],
+      "createdAt": "2026-06-20T23:13:51.000Z"
+    }
+  ],
+  "livros": [
+    {
+      "id": "6a3c528f866c945659db0502",
+      "titulo": "Corações em Código",
+      "autor": "Ana Ribeiro",
+      "editora": "Editora Alfa",
+      "ano": 2021,
+      "disponivel": true,
+      "descricao": "Romance moderno entre tecnologia e sentimentos.",
+      "preco": 29.9,
+      "categoriaIds": ["6a3c528f866c945659db0501"],
+      "createdAt": "2026-06-24T21:56:31.228Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0504",
+      "titulo": "Sombras da Mente",
+      "autor": "Lucas Ferraz",
+      "editora": "Editora Beta",
+      "ano": 2019,
+      "disponivel": true,
+      "descricao": "Terror psicológico intenso.",
+      "preco": 39.9,
+      "categoriaIds": [
+        "6a3c4d770b8e65f9ef7bfda5",
+        "6a3c4d270b8e65f9ef7bfd9e",
+        "6a3c4d310b8e65f9ef7bfd9f",
+        "6a3c4d640b8e65f9ef7bfda4"
+      ],
+      "createdAt": "2026-06-24T21:56:31.243Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0506",
+      "titulo": "Neon & Caos",
+      "autor": "Rafaela Torres",
+      "editora": "Editora Cyber",
+      "ano": 2022,
+      "disponivel": true,
+      "descricao": "Cidade cyberpunk em colapso digital.",
+      "preco": 49.9,
+      "categoriaIds": ["6a3c528f866c945659db0505"],
+      "createdAt": "2026-06-24T21:56:31.256Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0508",
+      "titulo": "O Algoritmo do Destino",
+      "autor": "Pedro Lins",
+      "editora": "Editora Code",
+      "ano": 2020,
+      "disponivel": true,
+      "descricao": "IA decide o futuro da humanidade.",
+      "preco": 59.9,
+      "categoriaIds": ["6a3c528f866c945659db0507"],
+      "createdAt": "2026-06-24T21:56:31.269Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050a",
+      "titulo": "Entre Cafés e Promessas",
+      "autor": "Juliana Costa",
+      "editora": "Editora Amor",
+      "ano": 2018,
+      "disponivel": true,
+      "descricao": "História de amor e decisões difíceis.",
+      "preco": 24.9,
+      "categoriaIds": ["6a3c528f866c945659db0509"],
+      "createdAt": "2026-06-24T21:56:31.322Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050c",
+      "titulo": "Crônicas do Reino Partido",
+      "autor": "Felipe Moura",
+      "editora": "Editora Real",
+      "ano": 2024,
+      "disponivel": true,
+      "descricao": "Conflitos políticos em um reino dividido.",
+      "preco": 44.9,
+      "categoriaIds": ["6a3c528f866c945659db050b"],
+      "createdAt": "2026-06-24T21:56:31.380Z"
+    },
+    {
+      "id": "6a3c528f866c945659db050e",
+      "titulo": "A Cidade que Observa",
+      "autor": "Bruno Azevedo",
+      "editora": "Editora Noir",
+      "ano": 2021,
+      "disponivel": true,
+      "descricao": "Mistério psicológico urbano.",
+      "preco": 34.9,
+      "categoriaIds": ["6a3c528f866c945659db050d"],
+      "createdAt": "2026-06-24T21:56:31.402Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0510",
+      "titulo": "Manual do Anti-Herói",
+      "autor": "Diego Santos",
+      "editora": "Editora Street",
+      "ano": 2017,
+      "disponivel": true,
+      "descricao": "Ação urbana com protagonista fora da lei.",
+      "preco": 39.9,
+      "categoriaIds": ["6a3c528f866c945659db050f"],
+      "createdAt": "2026-06-24T21:56:31.424Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0512",
+      "titulo": "Fragmentos do Eu",
+      "autor": "Camila Nogueira",
+      "editora": "Editora Alma",
+      "ano": 2022,
+      "disponivel": true,
+      "descricao": "Drama existencial profundo.",
+      "preco": 29.9,
+      "categoriaIds": ["6a3c528f866c945659db0511"],
+      "createdAt": "2026-06-24T21:56:31.438Z"
+    },
+    {
+      "id": "6a3c528f866c945659db0513",
+      "titulo": "O Último Protocolo",
+      "autor": "Rafael Mendes",
+      "editora": "Editora Tech",
+      "ano": 2023,
+      "disponivel": true,
+      "descricao": "Último sistema de IA tentando salvar a humanidade.",
+      "preco": 69.9,
+      "categoriaIds": ["6a3c528f866c945659db0507"],
+      "createdAt": "2026-06-24T21:56:31.444Z"
+    }
+  ],
+  "exemplares": [
+    {
+      "id": "6a3726df6c2c6ac711d99644",
+      "livroId": "6a3c528f866c945659db0502",
+      "estado": "BOM",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-20T23:48:47.248Z"
+    },
+    {
+      "id": "6a37285c6c2c6ac711d99645",
+      "livroId": "6a3c528f866c945659db0502",
+      "estado": "USADO",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-20T23:55:08.072Z"
+    },
+    {
+      "id": "6a3729ad6c2c6ac711d99646",
+      "livroId": "6a3c528f866c945659db0506",
+      "estado": "NOVO",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-21T00:00:45.273Z"
+    },
+    {
+      "id": "6a3729b16c2c6ac711d99647",
+      "livroId": "6a3c528f866c945659db0508",
+      "estado": "BOM",
+      "disponivel": false,
+      "vendido": false,
+      "createdAt": "2026-06-21T00:00:49.265Z"
+    },
+    {
+      "id": "6a3729b66c2c6ac711d99648",
+      "livroId": "6a3c528f866c945659db0508",
+      "estado": "NOVO",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-21T00:00:54.599Z"
+    },
+    {
+      "id": "6a3729ba6c2c6ac711d99649",
+      "livroId": "6a3c528f866c945659db0508",
+      "estado": "USADO",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-21T00:00:58.669Z"
+    },
+    {
+      "id": "6a373336b5774f45a40a862c",
+      "livroId": "6a3c528f866c945659db0504",
+      "estado": "NOVO",
+      "disponivel": true,
+      "vendido": false,
+      "createdAt": "2026-06-21T00:41:26.936Z"
+    }
+  ],
+  "emprestimos": [
+    {
+      "id": "6a372ca91c2a6a70c09f0462",
+      "usuarioId": "6a3c4cb60b8e65f9ef7bfd9c",
+      "exemplarId": "6a3729b16c2c6ac711d99647",
+      "dataEmprestimo": "2026-06-21T00:13:29.841Z",
+      "dataPrevista": "2026-06-24T00:13:29.824Z",
+      "dataDevolucao": null,
+      "moedasGanhas": 0,
+      "status": "EMPRESTADO"
+    },
+    {
+      "id": "6a372cb61c2a6a70c09f0463",
+      "usuarioId": "6a3c4c4bc14b7d8136148a52",
+      "exemplarId": "6a3726df6c2c6ac711d99644",
+      "dataEmprestimo": "2026-06-21T00:13:42.462Z",
+      "dataPrevista": "2026-06-24T00:13:42.460Z",
+      "dataDevolucao": "2026-06-21T00:13:59.362Z",
+      "moedasGanhas": 0,
+      "status": "DEVOLVIDO"
+    }
+  ],
+  "reservas": [
+    {
+      "id": "6a372c8c1c2a6a70c09f0461",
+      "userId": "6a3c4c4bc14b7d8136148a52",
+      "livroId": "6a3c528f866c945659db0502",
+      "exemplarId": "6a3726df6c2c6ac711d99644",
+      "status": "CONCLUIDA",
+      "createdAt": "2026-06-21T00:13:00.790Z",
+      "expiraEm": "2026-06-22T00:13:00.789Z"
+    }
+  ],
+  "compras": [],
+  "refreshTokens": [
+    {
+      "id": "6a3c4c6da74bbdd50abb53bc",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTNjNGM0YmMxNGI3ZDgxMzYxNDhhNTIiLCJuaXZlbF9wZXJmaWwiOiJERVYiLCJpYXQiOjE3ODIzMzY2MjEsImV4cCI6MTgxMzg3MjYyMX0._GDtfQVHVDypqMpYyCShpdCNr_0VoO__fEZWwKG01aE",
+      "userId": "6a3c4c4bc14b7d8136148a52",
+      "expiresAt": "2027-06-24T21:30:21.195Z",
+      "createdAt": "2026-06-24T21:30:21.196Z"
+    }
+  ]
+}

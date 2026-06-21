@@ -33,6 +33,12 @@ enum StatusReserva {
   CANCELADA
 }
 
+enum StatusCompra {
+  PENDENTE
+  CONCLUIDA
+  CANCELADA
+}
+
 model User {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
   nome          String
@@ -76,20 +82,19 @@ model Livro {
   disponivel   Boolean      @default(true)
   descricao    String       
   preco        Float        @default(0)
-  examplares   Exemplar[]
+  exemplares   Exemplar[]
   categoriaIds String[]     @db.ObjectId
   categorias   Categoria[]  @relation(fields: [categoriaIds], references: [id])
-  // emprestimos  Emprestimo[]
   reservas     Reserva[]
   createdAt    DateTime     @default(now())
 }
 
 model Emprestimo {
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  usuarioId      String           @db.ObjectId
-  usuario        User             @relation(fields: [usuarioId], references: [id])
-  exemplarId     String           @db.ObjectId
-  exemplar       Exemplar         @relation(fields: [exemplarId], references: [id])
+  usuarioId      String?           @db.ObjectId
+  usuario        User?             @relation(fields: [usuarioId], references: [id])
+  exemplarId     String?           @db.ObjectId
+  exemplar       Exemplar?         @relation(fields: [exemplarId], references: [id])
   dataEmprestimo DateTime         @default(now())
   dataPrevista   DateTime
   dataDevolucao  DateTime?
@@ -106,6 +111,7 @@ model Exemplar {
   vendido     Boolean        @default(false)
   emprestimos Emprestimo[]
   compras     Compra[]
+  reservas    Reserva[]
   createdAt   DateTime       @default(now())
 }
 
@@ -117,16 +123,19 @@ model Compra {
   exemplar    Exemplar @relation(fields: [exemplarId], references: [id])
   precoPago   Float
   pagoMoedas  Boolean  @default(false)
+  status      StatusCompra @default(PENDENTE)
   createdAt   DateTime @default(now())
 }
 
 model Reserva {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String         @db.ObjectId
-  user      User           @relation(fields: [userId], references: [id])
-  livroId   String         @db.ObjectId
-  livro     Livro          @relation(fields: [livroId], references: [id])
-  status    StatusReserva  @default(ATIVA)
-  createdAt DateTime       @default(now())
-  expiraEm  DateTime
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String         @db.ObjectId
+  user       User           @relation(fields: [userId], references: [id])
+  livroId    String         @db.ObjectId
+  livro      Livro          @relation(fields: [livroId], references: [id])
+  exemplarId String         @db.ObjectId
+  exemplar   Exemplar       @relation(fields: [exemplarId], references: [id])
+  status     StatusReserva  @default(ATIVA)
+  createdAt  DateTime       @default(now())
+  expiraEm   DateTime
 }

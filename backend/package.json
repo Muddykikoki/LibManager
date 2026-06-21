@@ -15,17 +15,26 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon --exec tsx src/server.js",
+    "start": "node src/server.js",
+    "genPrisma": "npx prisma generate",
+    "pushPrisma": "npx prisma db push",
+    "runner": "nodemon --exec tsx src/server.js",
+    "dev": "npm run genPrisma && npm run pushPrisma && npm run runner",
+    "dev:f": "npm run runner",
+    "db:export": "node scripts/export.js",
+    "db:seed": "node prisma/seed.js",
     "lint": "eslint .",
     "debug:fix": "eslint . --fix",
     "format": "prettier --write .",
     "debug": "npm run format && npm run lint",
     "roler": "node src/server.js",
     "type": "tsx watch src/server.js",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed::test": "tsx prisma/seed.ts",
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
