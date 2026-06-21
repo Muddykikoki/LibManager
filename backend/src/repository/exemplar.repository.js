@@ -57,3 +57,14 @@ export async function marcarVendido(id) {
     data: { vendido: true, disponivel: false },
   });
 }
+
+export async function buscarDisponivelPorLivroEEstado(livroId, estado) {
+  return prisma.Exemplar.findFirst({
+    where: {
+      livroId,
+      estado,
+      disponivel: true,
+      vendido: false,
+    },
+  });
+}
