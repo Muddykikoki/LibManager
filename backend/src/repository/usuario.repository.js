@@ -14,7 +14,14 @@ export async function buscarPorEmail(email) {
 }
 
 export async function atualizar(id, dados) {
-  return prisma.User.update({ where: { id: id }, data: dados });
+  const data = {};
+  if (dados.nome !== undefined) data.nome = dados.nome;
+  if (dados.email !== undefined) data.email = dados.email;
+  if (dados.senha !== undefined) data.senha = dados.senha;
+  if (dados.nivel_perfil !== undefined) data.nivel_perfil = dados.nivel_perfil;
+  if (dados.moedas !== undefined) data.moedas = dados.moedas;
+
+  return prisma.User.update({ where: { id }, data });
 }
 
 export async function deletar(id) {

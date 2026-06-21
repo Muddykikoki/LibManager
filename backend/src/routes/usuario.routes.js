@@ -13,15 +13,23 @@ const router = Router();
 router.post(
   "/criar",
   autenticar,
-  exigirPerfil("DEV"),
+  exigirPerfil(1),
   validar(usuarioSchema),
   userController.criarUsuario,
+);
+
+router.put(
+  "/editar/:id",
+  autenticar,
+  exigirPerfil(1),
+  validar(atualizarUsuarioSchema),
+  userController.atualizarUsuario,
 );
 
 router.delete(
   "/deletar/:id",
   autenticar,
-  exigirPerfil("DEV"),
+  exigirPerfil(1),
   userController.deletar,
 );
 
