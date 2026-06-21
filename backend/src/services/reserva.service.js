@@ -1,18 +1,22 @@
 import * as reservaRepository from "../repository/reserva.repository.js";
 import * as livroRepository from "../repository/livro.repository.js";
 import * as usuarioRepository from "../repository/usuario.repository.js";
+import * as exemplarRepository from "../repository/exemplar.repository.js";
+import * as emprestimoRepository from "../repository/emprestimo.repository.js";
 
 const HORAS_RESERVA = 24;
 
-export async function criar(userId, livroId) {
+export async function criar(userId, livroId, estado) {
   const livro = await livroRepository.buscarPorId(livroId);
   if (!livro) {
     throw new Error("Livro não encontrado");
   }
+
   const usuario = await usuarioRepository.buscarPorId(userId);
   if (!usuario) {
     throw new Error("Usuário não encontrado");
   }
+
   const reservaAtiva = await reservaRepository.buscarAtivaPorUserELivro(
     userId,
     livroId,
@@ -20,17 +24,24 @@ export async function criar(userId, livroId) {
   if (reservaAtiva) {
     throw new Error("Você já possui uma reserva ativa para este livro");
   }
-  const exemplaresDisponiveis = livro.exemplares?.filter(
-    (e) => e.disponivel && !e.vendido,
-  );
-  if (exemplaresDisponiveis?.length > 0) {
-    throw new Error(
-      "Este livro possui exemplares disponíveis. Vá direto ao balcão para retirar.",
-    );
+
+  const exemplarDisponivel =
+    await exemplarRepository.buscarDisponivelPorLivroEEstado(livroId, estado);
+  if (!exemplarDisponivel) {
+    throw new Error(`Nenhum exemplar ${estado} disponível no momento`);
   }
+
+  await exemplarRepository.marcarIndisponivel(exemplarDisponivel.id);
+
   const expiraEm = new Date();
   expiraEm.setHours(expiraEm.getHours() + HORAS_RESERVA);
-  return reservaRepository.criar({ userId, livroId, expiraEm });
+
+  return reservaRepository.criar({
+    userId,
+    livroId,
+    exemplarId: exemplarDisponivel.id,
+    expiraEm,
+  });
 }
 
 export async function listarAtivas() {
@@ -52,10 +63,13 @@ export async function cancelar(id, userId) {
   if (reserva.status !== "ATIVA") {
     throw new Error("Reserva não está ativa");
   }
+
+  await exemplarRepository.marcarDisponivel(reserva.exemplarId);
+
   return reservaRepository.atualizarStatus(id, "CANCELADA");
 }
 
-export async function concluir(id) {
+export async function concluir(id, dias) {
   const reserva = await reservaRepository.buscarPorId(id);
   if (!reserva) {
     throw new Error("Reserva não encontrada");
@@ -63,5 +77,13 @@ export async function concluir(id) {
   if (reserva.status !== "ATIVA") {
     throw new Error("Reserva não está ativa");
   }
+  const dataPrevista = new Date();
+  dataPrevista.setDate(dataPrevista.getDate() + dias);
+  await emprestimoRepository.criar({
+    usuarioId: reserva.userId,
+    exemplarId: reserva.exemplarId,
+    dataPrevista,
+  });
+
   return reservaRepository.atualizarStatus(id, "CONCLUIDA");
 }
