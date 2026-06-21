@@ -37,8 +37,11 @@ export async function listar(req, res) {
 export async function editar(req, res) {
   try {
     const { id } = req.params;
-    const { nome } = req.body;
-    const categoria = await categoriaService.atualizar(id, { nome });
+    const { nome, categoriasBaseIds } = req.body;
+    const categoria = await categoriaService.atualizar(id, {
+      nome,
+      categoriasBaseIds,
+    });
     res.json(categoria);
   } catch (error) {
     res.status(400).json({ error: error.message });

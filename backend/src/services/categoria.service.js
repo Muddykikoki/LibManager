@@ -6,7 +6,21 @@ export async function cadastrar(dados) {
     throw new Error("Categoria já existe");
   }
 
-  return categoriaRepository.criar({ nome: dados.nome });
+  const criarDados = { nome: dados.nome };
+
+  if (dados.categoriasBaseIds?.length > 0) {
+    const bases = await categoriaRepository.buscarPorIds(
+      dados.categoriasBaseIds,
+    );
+    if (bases.length !== dados.categoriasBaseIds.length) {
+      throw new Error("Uma ou mais categorias base não foram encontradas");
+    }
+    criarDados.categoriasBase = {
+      connect: dados.categoriasBaseIds.map((id) => ({ id })),
+    };
+  }
+
+  return categoriaRepository.criar(criarDados);
 }
 
 export async function vincularSubcategorias(id, categoriasBaseIds) {
@@ -45,7 +59,17 @@ export async function criarSubcategoria(id, subCategoriaIds) {
 }
 
 export async function listar() {
-  return categoriaRepository.listar();
+  const categorias = await categoriaRepository.listar();
+
+  const bases = categorias
+    .filter((c) => !c.categoriasBase || c.categoriasBase.length === 0)
+    .sort((a, b) => a.nome.localeCompare(b.nome));
+
+  const compostas = categorias
+    .filter((c) => c.categoriasBase && c.categoriasBase.length > 0)
+    .sort((a, b) => a.nome.localeCompare(b.nome));
+
+  return [...bases, ...compostas];
 }
 
 export async function atualizar(id, dados) {
@@ -61,7 +85,28 @@ export async function atualizar(id, dados) {
     }
   }
 
-  return categoriaRepository.atualizar(id, dados);
+  const atualizarDados = {};
+  if (dados.nome) {
+    atualizarDados.nome = dados.nome;
+  }
+
+  if (dados.categoriasBaseIds !== undefined) {
+    if (dados.categoriasBaseIds.length > 0) {
+      const bases = await categoriaRepository.buscarPorIds(
+        dados.categoriasBaseIds,
+      );
+      if (bases.length !== dados.categoriasBaseIds.length) {
+        throw new Error("Uma ou mais categorias base não foram encontradas");
+      }
+      atualizarDados.categoriasBase = {
+        set: dados.categoriasBaseIds.map((id) => ({ id })),
+      };
+    } else {
+      atualizarDados.categoriasBase = { set: [] };
+    }
+  }
+
+  return categoriaRepository.atualizar(id, atualizarDados);
 }
 
 export async function deletar(id) {

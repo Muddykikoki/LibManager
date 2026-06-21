@@ -4,6 +4,8 @@ import { validar } from "../middlewares/validar.middleware.js";
 import {
   categoriaSchema,
   atualizarCategoriaSchema,
+  subCategoriaSchema,
+  atualizarSubCategoriaSchema,
 } from "../schemas/categoria.schema.js";
 import { exigirPerfil } from "../middlewares/perfil.middleware.js";
 import { autenticar } from "../middlewares/auth.middleware.js";
@@ -39,6 +41,7 @@ routes.post(
   "/sub-categoria",
   autenticar,
   exigirPerfil(1),
+  validar(subCategoriaSchema),
   categoriaController.criarSubcategoria,
 );
 
