@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { FiX } from "react-icons/fi";
-import "../styles/modal.css";
+import { modal } from "../styles/components";
 
 export default function Modal({ aberto, fechar, titulo, children }) {
   useEffect(() => {
@@ -20,15 +20,23 @@ export default function Modal({ aberto, fechar, titulo, children }) {
   if (!aberto) return null;
 
   return (
-    <div className="modal-backdrop" onClick={fechar}>
-      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>{titulo}</h2>
-          <button className="modal-close" onClick={fechar}>
+    <div
+      className={modal.backdrop}
+      onClick={fechar}
+      style={{ animation: "fadeIn 0.15s ease" }}
+    >
+      <div
+        className={modal.container}
+        onClick={(e) => e.stopPropagation()}
+        style={{ animation: "slideUp 0.2s ease" }}
+      >
+        <div className={modal.header}>
+          <h2 className={modal.title}>{titulo}</h2>
+          <button className={modal.close} onClick={fechar}>
             <FiX size={20} />
           </button>
         </div>
-        <div className="modal-body">{children}</div>
+        <div className={modal.body}>{children}</div>
       </div>
     </div>
   );

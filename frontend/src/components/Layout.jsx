@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { theme } from "../styles/theme";
 import Navbar from "./Navbar";
-import "../styles/navbar.css";
+import TopBar from "./TopBar";
 
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -17,14 +18,23 @@ export default function Layout({ children }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const sidebarWidth = isMobile ? 68 : collapsed ? 68 : 250;
+
   return (
-    <div className="app-layout">
+    <div className={theme.appLayout}>
       {isMobile && !collapsed && (
-        <div className="sidebar-backdrop" onClick={() => setCollapsed(true)} />
+        <div className={theme.backdrop} onClick={() => setCollapsed(true)} />
       )}
-      <Navbar collapsed={collapsed} setCollapsed={setCollapsed} isMobile={isMobile} />
-      <main className={`main-content ${collapsed ? "collapsed" : ""} ${isMobile ? "mobile" : ""}`}>
-        {children}
+      <Navbar
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        isMobile={isMobile}
+      />
+      <main className={theme.mainContent} style={{ marginLeft: sidebarWidth }}>
+        <div className="w-full max-w-[1200px]">
+          <TopBar />
+          {children}
+        </div>
       </main>
     </div>
   );
