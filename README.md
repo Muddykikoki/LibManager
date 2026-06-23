@@ -52,6 +52,7 @@ cp .env.example .env
 
 Siga a ordem abaixo para preparar o banco de dados:
 
+Altere a linha 7 de `url=env("DATABASE_URL_PROD")` para `url=env("DATABASE_URL_DEV")`
 ```bash
 npm run genPrisma
 npm run pushPrisma
